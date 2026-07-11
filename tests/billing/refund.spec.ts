@@ -1,39 +1,29 @@
-import { test, expect, type Page } from 'playwright/test';
+import { test, expect } from '@playwright/test';
+import { loginAndOpenBilling } from './billingTestSetup';
 
-const BASE_URL = 'https://team40.qaaerp.com';
-const USER_ID = 'team40';
-const PASSWORD = 'vASPFtSh4d';
+test.describe('Billing - Refund scenarios', () => {
+  test('should display refund prerequisites on an existing billing record', async ({ page }) => {
+    const billingPage = await loginAndOpenBilling(page);
 
-async function login(page: Page) {
-  await page.goto(`${BASE_URL}/web/login?redirect=%2Fodoo%2Fweb%2Flogin%3F`);
-  await page.getByRole('textbox', { name: 'Email' }).fill(USER_ID);
-  await page.getByRole('textbox', { name: 'Password' }).fill(PASSWORD);
-  await page.getByRole('button', { name: 'Log in' }).click();
-  await expect(page).toHaveURL(/\/odoo\//);
-}
+    await billingPage.openFirstBillFromList();
+    await billingPage.verifyRefundPrerequisites();
+    await billingPage.verifySummarySection();
+  });
 
-async function openBilling(page: Page) {
-  const billingsLink = page.getByRole('link', { name: /Billings/i });
-  await expect(billingsLink.first()).toBeVisible();
-  await billingsLink.first().click();
+  test('should keep refund prerequisites unavailable until billing lines are prepared in new record', async ({
+    page,
+  }) => {
+    const billingPage = await loginAndOpenBilling(page);
 
-  await expect(page.getByRole('button', { name: 'New' })).toBeVisible();
-}
+    await billingPage.openNewForm();
+    await billingPage.verifyInvoiceActionButtons();
 
-test.describe('Billing - Refund controls', () => {
-  test('should validate refund-related controls availability from billing record', async ({ page }) => {
-    await login(page);
-    await openBilling(page);
+    await expect(billingPage.getAddLineButton()).toBeVisible();
+    await expect(billingPage.getPatientCombobox()).toBeVisible();
 
-    const firstBillLink = page.getByRole('cell', { name: /^BILL\// }).first();
-    await expect(firstBillLink).toBeVisible();
-    await firstBillLink.click();
+    await billingPage.clickCreateInvoice();
 
-    await expect(page.getByRole('button', { name: 'Create Invoice' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Print Invoice' })).toBeVisible();
-    await expect(page.getByRole('button', { name: '↻ Reload from Patient' })).toBeVisible();
-
-    await expect(page.getByRole('tab', { name: 'Billing Lines' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Add a line' })).toBeVisible();
+    await expect(billingPage.getPatientCombobox()).toBeVisible();
+    await expect(billingPage.getAddLineButton()).toBeVisible();
   });
 });
