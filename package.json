@@ -1,0 +1,40 @@
+{
+<<<<<<< HEAD
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+=======
+  "name": "hospital-management-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jitendraachar/hospital-management-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jitendraachar/hospital-management-automation/issues"
+  },
+  "homepage": "https://github.com/Jitendraachar/hospital-management-automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+>>>>>>> 3b932712144519a8085d5edb20e45ebd61689d22
+  }
+}
