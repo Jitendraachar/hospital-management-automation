@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Brief overview
 - Project-specific domain rules for the Hospital Management System.
 - Apply these checks while creating, reviewing, or validating features, test cases, and automation scenarios.
@@ -30,3 +31,26 @@
 - Ensure each validation confirms both:
   - prevention of incorrect action, and
   - preservation of correct system state and data.
+=======
+Hospital Domain
+
+Modules:
+
+Login
+
+Patient
+
+Doctor
+
+Appointment
+
+Billing
+
+Laboratory
+
+Pharmacy
+
+Medical Records
+
+Each generated scenario should understand relationships between modules.
+>>>>>>> 9496aa88e8e66dee1aa39e68fe258791ca992a8c
