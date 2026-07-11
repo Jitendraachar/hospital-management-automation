@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
 
@@ -10,7 +13,7 @@ export default defineConfig({
 
   use: {
 
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'https://demo-url.com',
 
     browserName: 'chromium',
 
