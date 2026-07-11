@@ -1,12 +1,21 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from '../BasePage';
 import { getBaseUrl } from '../helpers/env';
+
+export interface PatientFormData {
+    name: string;
+    phone?: string;
+    email?: string;
+    address?: string;
+}
 
 export class PatientPage extends BasePage {
     private readonly newButton: Locator;
     private readonly searchInput: Locator;
     private readonly saveButton: Locator;
     private readonly discardButton: Locator;
+    private readonly actionsMenuButton: Locator;
+    private readonly deleteMenuItem: Locator;
 
     private readonly patientNameInput: Locator;
     private readonly phoneInput: Locator;
@@ -23,8 +32,10 @@ export class PatientPage extends BasePage {
 
         this.newButton = page.getByRole('button', { name: 'New' }).first();
         this.searchInput = page.getByRole('searchbox', { name: 'Search...' });
-        this.saveButton = page.getByRole('button', { name: 'Save manually' });
-        this.discardButton = page.getByRole('button', { name: 'Discard all changes' });
+        this.saveButton = page.getByRole('button', { name: /Save manually|Save/i }).first();
+        this.discardButton = page.getByRole('button', { name: /Discard all changes|Discard/i }).first();
+        this.actionsMenuButton = page.getByRole('button', { name: 'Actions menu' }).first();
+        this.deleteMenuItem = page.getByRole('menuitem', { name: /Delete/i }).first();
 
         this.patientNameInput = page.getByRole('textbox', { name: 'Patient Name' });
         this.phoneInput = page.getByRole('textbox', { name: 'Phone' });
@@ -42,25 +53,21 @@ export class PatientPage extends BasePage {
         await this.navigate(url);
     }
 
-    async openNewForm(): Promise<void> {
-        const url = new URL('/odoo/action-372/action-374/new', getBaseUrl()).toString();
-        await this.navigate(url);
-    }
-
     async clickNew(): Promise<void> {
         await this.click(this.newButton);
     }
 
     async search(term: string): Promise<void> {
         await this.fill(this.searchInput, term);
+        await this.page.keyboard.press('Enter');
     }
 
-    async fillPatientForm(data: {
-        name: string;
-        phone?: string;
-        email?: string;
-        address?: string;
-    }): Promise<void> {
+    async clearSearch(): Promise<void> {
+        await this.fill(this.searchInput, '');
+        await this.page.keyboard.press('Enter');
+    }
+
+    async fillPatientForm(data: PatientFormData): Promise<void> {
         await this.fill(this.patientNameInput, data.name);
 
         if (data.phone !== undefined) {
@@ -82,6 +89,50 @@ export class PatientPage extends BasePage {
 
     async discard(): Promise<void> {
         await this.click(this.discardButton);
+    }
+
+    async createPatient(data: PatientFormData): Promise<void> {
+        await this.clickNew();
+        await this.fillPatientForm(data);
+        await this.save();
+    }
+
+    async openPatientByText(text: string): Promise<void> {
+        await this.click(this.getRowByText(text));
+    }
+
+    async updatePhone(phone: string): Promise<void> {
+        await this.fill(this.phoneInput, phone);
+    }
+
+    async updateEmail(email: string): Promise<void> {
+        await this.fill(this.emailInput, email);
+    }
+
+    async openActionsMenu(): Promise<void> {
+        await this.click(this.actionsMenuButton);
+    }
+
+    async deleteFromActionsMenu(): Promise<void> {
+        await this.openActionsMenu();
+        await this.click(this.deleteMenuItem);
+
+        const confirmDeleteButton = this.page
+            .getByRole('button', { name: /Ok|OK|Confirm|Delete/i })
+            .first();
+
+        if (await confirmDeleteButton.isVisible({ timeout: 1500 }).catch(() => false)) {
+            await this.click(confirmDeleteButton);
+        }
+    }
+
+    async expectListViewLoaded(): Promise<void> {
+        await expect(this.newButton).toBeVisible();
+        await expect(this.searchInput).toBeVisible();
+        await expect(this.patientUhidHeader).toBeVisible();
+        await expect(this.patientNameHeader).toBeVisible();
+        await expect(this.patientPhoneHeader).toBeVisible();
+        await expect(this.patientEmailHeader).toBeVisible();
     }
 
     getSearchInput(): Locator {
@@ -130,6 +181,14 @@ export class PatientPage extends BasePage {
 
     getPatientEmailHeader(): Locator {
         return this.patientEmailHeader;
+    }
+
+    getActionsMenuButton(): Locator {
+        return this.actionsMenuButton;
+    }
+
+    getDeleteMenuItem(): Locator {
+        return this.deleteMenuItem;
     }
 
     getRowByText(text: string): Locator {
