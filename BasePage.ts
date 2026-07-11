@@ -40,7 +40,7 @@ export class BasePage {
 
     async takeScreenshot(fileName: string) {
         await this.page.screenshot({
-            path: `screenshots/${fileName}.png`,
+            path: `reports/screenshots/${fileName}.png`,
             fullPage: true
         });
     }
