@@ -67,14 +67,13 @@ export class BillingPage extends BasePage {
 
   async openList(): Promise<void> {
     const url = new URL('/odoo/action-372/action-383', getBaseUrl()).toString();
-    await this.navigate(url);
+    await this.page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await this.ensureBillingListLoaded();
   }
 
   async openNewForm(): Promise<void> {
-    const url = new URL('/odoo/action-372/action-383/new', getBaseUrl()).toString();
-    await this.navigate(url);
-    await this.ensureBillingFormLoaded();
+    await this.openList();
+    await this.clickNew();
   }
 
   async ensureBillingListLoaded(): Promise<void> {
@@ -86,8 +85,7 @@ export class BillingPage extends BasePage {
   }
 
   async ensureBillingFormLoaded(): Promise<void> {
-    await expect(this.createInvoiceButton).toBeVisible({ timeout: 15000 });
-    await expect(this.patientCombobox).toBeVisible();
+    await expect(this.patientCombobox).toBeVisible({ timeout: 15000 });
     await expect(this.billingLinesTab).toBeVisible();
   }
 
@@ -98,19 +96,44 @@ export class BillingPage extends BasePage {
 
   async search(term: string): Promise<void> {
     await this.fill(this.searchInput, term);
-    await this.page.keyboard.press('Enter');
   }
 
   async openFirstBillFromList(): Promise<void> {
-    await expect(this.firstBillCell).toBeVisible();
-    await this.click(this.firstBillCell);
-    await this.ensureBillingFormLoaded();
+    const billCells = this.page.getByRole('cell', { name: /^BILL\// });
+    const billCount = await billCells.count();
+
+    for (let index = 0; index < billCount; index++) {
+      const billCell = billCells.nth(index);
+
+      if (!(await billCell.isVisible())) {
+        continue;
+      }
+
+      await billCell.dblclick();
+      await this.ensureBillingFormLoaded();
+
+      if (await this.createInvoiceButton.isVisible()) {
+        return;
+      }
+
+      const backToBillingButton = this.page.getByRole('button', { name: /Back to Billing/i }).first();
+      if (await backToBillingButton.isVisible()) {
+        await backToBillingButton.click();
+      } else {
+        const billingBreadcrumb = this.page.getByRole('link', { name: 'Billing' }).first();
+        await this.click(billingBreadcrumb);
+      }
+
+      await this.ensureBillingListLoaded();
+    }
+
+    await this.openNewForm();
   }
 
   async openBillByNumber(billNumber: string): Promise<void> {
     const billCell = this.page.getByRole('cell', { name: new RegExp(`^${billNumber}$`, 'i') });
     await expect(billCell).toBeVisible();
-    await this.click(billCell);
+    await billCell.dblclick();
     await this.ensureBillingFormLoaded();
   }
 
@@ -130,6 +153,102 @@ export class BillingPage extends BasePage {
     await this.click(this.addLineButton);
   }
 
+  private getFirstEditableLineRow(): Locator {
+    return this.page
+      .getByRole('row')
+      .filter({ has: this.page.getByRole('button', { name: 'Delete row' }) })
+      .first();
+  }
+
+  async fillOrUpdateFirstLine(serviceName: string, description: string, quantity: string, unitPrice: string): Promise<void> {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        if ((await this.page.getByRole('button', { name: 'Delete row' }).count()) === 0) {
+          await this.addBillingLine();
+        }
+
+        const row = this.getFirstEditableLineRow();
+
+        const serviceCell = row.getByRole('cell').nth(1);
+        await this.click(serviceCell);
+        const serviceInput = serviceCell.getByRole('combobox').first();
+        await serviceInput.fill(serviceName);
+        await this.page.keyboard.press('Enter');
+
+        const descriptionCell = row.getByRole('cell').nth(2);
+        await this.click(descriptionCell);
+        const descriptionInput = descriptionCell.getByRole('textbox').first();
+        await expect(descriptionInput).toBeVisible();
+        await descriptionInput.fill(description);
+
+        const quantityCell = row.getByRole('cell').nth(3);
+        await this.click(quantityCell);
+        const quantityInput = quantityCell.getByRole('textbox').first();
+        await expect(quantityInput).toBeVisible();
+        await quantityInput.fill(quantity);
+
+        const unitPriceCell = row.getByRole('cell').nth(4);
+        await this.click(unitPriceCell);
+        const unitPriceInput = unitPriceCell.getByRole('textbox').first();
+        await expect(unitPriceInput).toBeVisible();
+        await unitPriceInput.fill(unitPrice);
+
+        await this.page.keyboard.press('Tab');
+        return;
+      } catch (error) {
+        if (attempt === 2) {
+          throw error;
+        }
+        await this.page.keyboard.press('Escape').catch(() => undefined);
+      }
+    }
+  }
+
+  async getFirstLineSnapshot(): Promise<{ description: string; quantity: string; unitPrice: string; subtotal: string }> {
+    const row = this.getFirstEditableLineRow();
+
+    const description = (await row.getByRole('cell').nth(2).textContent())?.trim() ?? '';
+    const quantity = (await row.getByRole('cell').nth(3).textContent())?.trim() ?? '';
+    const unitPrice = (await row.getByRole('cell').nth(4).textContent())?.trim() ?? '';
+    const subtotal = (await row.getByRole('cell').nth(5).textContent())?.trim() ?? '';
+
+    return { description, quantity, unitPrice, subtotal };
+  }
+
+  async getCurrentBillNumber(): Promise<string> {
+    const billText = await this.page.getByText(/^BILL\/\d+$/).first().textContent();
+    return (billText ?? '').trim();
+  }
+
+  async getFirstBillNumberFromList(): Promise<string> {
+    await this.ensureBillingListLoaded();
+    const firstBill = (await this.page.getByRole('cell', { name: /^BILL\// }).first().textContent()) ?? '';
+    return firstBill.trim();
+  }
+
+  async getVisibleBillNumbers(): Promise<string[]> {
+    await this.ensureBillingListLoaded();
+    await expect(this.firstBillCell).toBeVisible({ timeout: 15000 });
+
+    const billCells = this.page.getByRole('cell', { name: /^BILL\// });
+    const count = await billCells.count();
+    const values: string[] = [];
+
+    for (let index = 0; index < count; index++) {
+      const text = (await billCells.nth(index).textContent())?.trim() ?? '';
+      if (text && !values.includes(text)) {
+        values.push(text);
+      }
+    }
+
+    return values;
+  }
+
+  async getSelectedPatientName(): Promise<string> {
+    const value = (await this.patientCombobox.textContent()) ?? '';
+    return value.trim();
+  }
+
   async clickCreateInvoice(): Promise<void> {
     await this.click(this.createInvoiceButton);
   }
@@ -140,6 +259,33 @@ export class BillingPage extends BasePage {
 
   async discard(): Promise<void> {
     await this.click(this.discardButton);
+  }
+
+  async deleteCurrentBill(): Promise<void> {
+    this.page.once('dialog', async (dialog) => {
+      await dialog.accept();
+    });
+
+    await this.click(this.page.getByRole('button', { name: 'Actions menu' }).first());
+
+    const deleteMenuItem = this.page.getByRole('menuitem', { name: /^Delete$/i }).first();
+    const deleteButton = this.page.getByRole('button', { name: /^Delete$/i }).first();
+
+    if (await deleteMenuItem.isVisible()) {
+      await deleteMenuItem.click();
+    } else if (await deleteButton.isVisible()) {
+      await deleteButton.click();
+    }
+
+    const confirmDelete = this.page.getByRole('button', { name: /Delete|Ok|Confirm/i }).first();
+    if (await confirmDelete.isVisible()) {
+      await confirmDelete.click();
+    }
+  }
+
+  async isBillVisibleInList(billNumber: string): Promise<boolean> {
+    await this.search(billNumber);
+    return await this.getRowByText(billNumber).first().isVisible();
   }
 
   async verifySummarySection(): Promise<void> {

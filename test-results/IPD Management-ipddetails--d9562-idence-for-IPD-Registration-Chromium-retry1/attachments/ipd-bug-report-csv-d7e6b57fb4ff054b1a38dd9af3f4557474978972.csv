@@ -1,0 +1,23 @@
+Bug Title,Module,Feature,Environment,Browser,Build Version,Severity,Priority,Step,Expected,Actual,Reproducibility,Console Errors,Network Failures,Evidence,Timestamp
+"IPD Registration validation failure 1: Step 1 – Login","IPD Management","IPD Registration","https://team40.qaaerp.com/odoo (win32)","149.0.7827.55","N/A","High","High","Step 1 – Login","User should login successfully and land on dashboard.","[2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator: getByRole('button', { name: 'User User is idle' })
+Expected: visible
+Timeout: 30000ms
+Error: element(s) not found
+
+Call log:
+[2m  - Expect ""toBeVisible"" with timeout 30000ms[22m
+[2m  - waiting for getByRole('button', { name: 'User User is idle' })[22m
+","Yes","","[]","reports\evidence\ipd-registration-failure-1783843275120.png | reports\evidence\ipd-registration-fullpage-1783843275120.png | reports\evidence\ipd-registration-dom-1783843275120.html | reports\evidence\ipd-registration-console-1783843275120.json | reports\evidence\ipd-registration-network-1783843275120.json","2026-07-12T08:02:09.733Z"
+"IPD Registration validation failure 2: Unhandled test exception","IPD Management","IPD Registration","https://team40.qaaerp.com/odoo (win32)","149.0.7827.55","N/A","High","High","Unhandled test exception","IPD automation should complete without unhandled exceptions.","[2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator: getByRole('button', { name: 'User User is idle' })
+Expected: visible
+Timeout: 30000ms
+Error: element(s) not found
+
+Call log:
+[2m  - Expect ""toBeVisible"" with timeout 30000ms[22m
+[2m  - waiting for getByRole('button', { name: 'User User is idle' })[22m
+","Yes","","[]","reports\evidence\ipd-registration-failure-1783843275120.png | reports\evidence\ipd-registration-fullpage-1783843275120.png | reports\evidence\ipd-registration-dom-1783843275120.html | reports\evidence\ipd-registration-console-1783843275120.json | reports\evidence\ipd-registration-network-1783843275120.json","2026-07-12T08:02:09.733Z"

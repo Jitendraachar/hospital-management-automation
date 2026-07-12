@@ -9,10 +9,15 @@ export async function loginAndOpenBilling(page: Page): Promise<BillingPage> {
   const loginPage = new LoginPage(page);
   const billingPage = new BillingPage(page);
 
-  await loginPage.open();
-  await loginPage.login(USERNAME, PASSWORD);
+  await page.goto('https://team40.qaaerp.com/odoo');
 
-  await expect(loginPage.getDashboardLink()).toBeVisible();
+  const alreadyAuthenticated = await loginPage.getUserStatusButton().isVisible().catch(() => false);
+
+  if (!alreadyAuthenticated) {
+    await loginPage.open();
+    await loginPage.login(USERNAME, PASSWORD);
+  }
+
   await billingPage.openList();
 
   return billingPage;

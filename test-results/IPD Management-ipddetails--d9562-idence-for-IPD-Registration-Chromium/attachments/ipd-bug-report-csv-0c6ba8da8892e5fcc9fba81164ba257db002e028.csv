@@ -1,0 +1,17 @@
+Bug Title,Module,Feature,Environment,Browser,Build Version,Severity,Priority,Step,Expected,Actual,Reproducibility,Console Errors,Network Failures,Evidence,Timestamp
+"IPD Registration validation failure 1: Step 3 – Rule-based negative checks","IPD Management","IPD Registration","https://team40.qaaerp.com/odoo (win32)","149.0.7827.55","N/A","High","High","Step 3 – Rule-based negative checks","Invalid values should be handled safely (no crash and field remains usable).","locator.fill: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('textbox', { name: 'Phone' })[22m
+","Yes","","[]","reports\evidence\ipd-registration-failure-1783843220360.png | reports\evidence\ipd-registration-fullpage-1783843220360.png | reports\evidence\ipd-registration-dom-1783843220360.html | reports\evidence\ipd-registration-console-1783843220360.json | reports\evidence\ipd-registration-network-1783843220360.json","2026-07-12T08:01:08.560Z"
+"IPD Registration validation failure 2: Step 4 – Edit created IPD registration","IPD Management","IPD Registration","https://team40.qaaerp.com/odoo (win32)","149.0.7827.55","N/A","High","High","Step 4 – Edit created IPD registration","Edited values should save and persist.","[2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator: getByRole('textbox', { name: 'Patient Name' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+[2m  - Expect ""toBeVisible"" with timeout 5000ms[22m
+[2m  - waiting for getByRole('textbox', { name: 'Patient Name' })[22m
+","Yes","","[]","reports\evidence\ipd-registration-failure-1783843220360.png | reports\evidence\ipd-registration-fullpage-1783843220360.png | reports\evidence\ipd-registration-dom-1783843220360.html | reports\evidence\ipd-registration-console-1783843220360.json | reports\evidence\ipd-registration-network-1783843220360.json","2026-07-12T08:01:08.560Z"
+"IPD Registration validation failure 3: Step 5 – Delete created IPD registration","IPD Management","IPD Registration","https://team40.qaaerp.com/odoo (win32)","149.0.7827.55","N/A","High","High","Step 5 – Delete created IPD registration","Deleted record should not appear in list/search after refresh.","Deleted IPD record IPD/0008 is still visible.","Yes","","[]","reports\evidence\ipd-registration-failure-1783843220360.png | reports\evidence\ipd-registration-fullpage-1783843220360.png | reports\evidence\ipd-registration-dom-1783843220360.html | reports\evidence\ipd-registration-console-1783843220360.json | reports\evidence\ipd-registration-network-1783843220360.json","2026-07-12T08:01:08.560Z"

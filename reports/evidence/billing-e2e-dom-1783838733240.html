@@ -1,0 +1,833 @@
+<!DOCTYPE html><html lang="en-US" data-website-id="1" data-main-object="ir.ui.view(189,)" dir="ltr" data-logged="false"><head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="Odoo">
+            
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Login | My Website">
+        <meta property="og:site_name" content="My Website">
+        <meta property="og:url" content="http://team40.qaaerp.com/web/login">
+        <meta property="og:image" content="http://team40.qaaerp.com/web/image/website/1/logo?unique=fffca6a">
+            
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Login | My Website">
+        <meta name="twitter:image" content="http://team40.qaaerp.com/web/image/website/1/logo/300x300?unique=fffca6a">
+        
+        <link rel="canonical" href="http://team40.qaaerp.com/web/login">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <title>Login | My Website</title>
+        <link type="image/x-icon" rel="shortcut icon" href="/web/image/website/1/favicon?unique=fffca6a">
+        <link rel="preload" href="/web/static/src/libs/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" crossorigin="">
+        <link type="text/css" rel="stylesheet" href="/web/assets/1/99080d8/web.assets_frontend.min.css">
+        <script id="web.layout.odooscript" type="text/javascript">
+            var odoo = {
+                csrf_token: "297a370ff4760bc12cb2833442761d31fb582bfbo1815374715",
+                debug: "",
+            };
+        </script>
+        <script type="text/javascript">
+            odoo.__session_info__ = {"is_admin": false, "is_system": false, "is_public": true, "is_internal_user": false, "is_website_user": true, "uid": null, "registry_hash": "c71c4699d51ff5b6f5aaeefff56150a86e16e53de6b33b3ddd96d88fa70cd094", "is_frontend": true, "profile_session": null, "profile_collectors": null, "profile_params": null, "show_effect": true, "currencies": {"1": {"name": "USD", "symbol": "$", "position": "before", "digits": [69, 2]}}, "quick_login": true, "bundle_params": {"lang": "en_US", "website_id": 1}, "test_mode": false, "websocket_worker_version": "19.0-2", "translationURL": "/website/translations", "geoip_country_code": null, "geoip_phone_code": null, "lang_url_code": "en"};
+            if (!/(^|;\s)tz=/.test(document.cookie)) {
+                const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                document.cookie = `tz=${userTZ}; path=/`;
+            }
+        </script>
+        <script type="text/javascript" defer="defer" src="/web/assets/1/97dc08e/web.assets_frontend_minimal.min.js" onerror="__odooAssetError=1"></script>
+        <script type="text/javascript" onerror="__odooAssetError=1" defer="defer" src="/web/assets/1/580aec8/web.assets_frontend_lazy.min.js"></script>
+        
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+                    /* ── Global reset helpers ── */
+                    .scc-header *, .scc-footer * { box-sizing: border-box; }
+
+                    /* ── TOP BAR ── */
+                    .scc-topbar {
+                        background: #3d1259;
+                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                        padding: 6px 0;
+                        font-family: 'DM Sans', sans-serif;
+                    }
+                    .scc-topbar a {
+                        color: rgba(255,255,255,0.62);
+                        font-size: 12.5px;
+                        text-decoration: none;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        transition: color 0.2s;
+                    }
+                    .scc-topbar a:hover { color: #ab2bc2; }
+                    .scc-topbar-sep { color: rgba(255,255,255,0.15); padding: 0 4px; }
+
+                    .scc-badge-gold {
+                        background: rgba(171,43,194,0.12);
+                        border: 1px solid rgba(171,43,194,0.32);
+                        color: #d896f0;
+                        font-size: 11.5px;
+                        font-weight: 600;
+                        padding: 3px 12px;
+                        border-radius: 100px;
+                        letter-spacing: 0.3px;
+                        white-space: nowrap;
+                    }
+                    .scc-badge-teal {
+                        background: rgba(156,39,176,0.22);
+                        border: 1px solid rgba(156,39,176,0.45);
+                        color: #c45fd8;
+                        font-size: 11.5px;
+                        font-weight: 600;
+                        padding: 3px 12px;
+                        border-radius: 100px;
+                        white-space: nowrap;
+                    }
+                    .scc-badge-teal::before {
+                        content: '●';
+                        margin-right: 5px;
+                        animation: scc-pulse 2s infinite;
+                    }
+                    @keyframes scc-pulse {
+                        0%,100% { opacity:1; }
+                        50% { opacity:0.4; }
+                    }
+
+                    /* ── MAIN NAV ── */
+                    .scc-header {
+                        background: #2a0a40;
+                        border-bottom: 1px solid rgba(171,43,194,0.22);
+                        font-family: 'DM Sans', sans-serif;
+                        position: sticky;
+                        top: 0;
+                        z-index: 1030;
+                    }
+                    .scc-navbar { min-height: 70px; padding: 0; }
+
+                    /* Logo */
+                    .scc-logo-wrap {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        text-decoration: none !important;
+                        padding: 10px 0;
+                    }
+                    .scc-logo-img {
+                        width: 52px;
+                        height: 52px;
+                        border-radius: 10px;
+                        object-fit: cover;
+                        border: 1.5px solid rgba(171,43,194,0.35);
+                        box-shadow: 0 0 0 3px rgba(171,43,194,0.08);
+                    }
+                    .scc-logo-text-main {
+                        font-family: 'Playfair Display', Georgia, serif;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #ffffff;
+                        line-height: 1.15;
+                        letter-spacing: -0.2px;
+                    }
+                    .scc-logo-text-sub {
+                        font-size: 9.5px;
+                        font-weight: 600;
+                        color: #ab2bc2;
+                        letter-spacing: 2.5px;
+                        text-transform: uppercase;
+                        line-height: 1;
+                        margin-top: 2px;
+                    }
+
+                    /* Nav links */
+                    .scc-nav-link {
+                        color: rgba(255,255,255,0.78) !important;
+                        font-size: 14px;
+                        font-weight: 500;
+                        padding: 8px 13px !important;
+                        border-radius: 6px;
+                        transition: color 0.2s, background 0.2s;
+                    }
+                    .scc-nav-link:hover, .scc-nav-link:focus {
+                        color: #ffffff !important;
+                        background: rgba(255,255,255,0.07);
+                    }
+                    .scc-nav-link.active {
+                        color: #ab2bc2 !important;
+                    }
+
+                    /* Dropdown */
+                    .scc-dropdown-menu {
+                        background: #33104d !important;
+                        border: 1px solid rgba(171,43,194,0.2) !important;
+                        border-radius: 10px !important;
+                        padding: 8px !important;
+                        min-width: 220px;
+                        box-shadow: 0 16px 48px rgba(0,0,0,0.45) !important;
+                        margin-top: 4px !important;
+                    }
+                    .scc-dropdown-item {
+                        color: rgba(255,255,255,0.72) !important;
+                        font-size: 13.5px;
+                        padding: 8px 14px !important;
+                        border-radius: 6px;
+                        transition: all 0.18s;
+                        display: flex;
+                        align-items: center;
+                        gap: 9px;
+                    }
+                    .scc-dropdown-item:hover {
+                        color: #ffffff !important;
+                        background: rgba(156,39,176,0.22) !important;
+                    }
+                    .scc-dropdown-item svg { flex-shrink: 0; }
+
+                    /* CTA buttons */
+                    .scc-btn-ghost {
+                        color: #ab2bc2 !important;
+                        font-size: 13px;
+                        font-weight: 500;
+                        padding: 8px 16px;
+                        border: 1px solid rgba(171,43,194,0.35);
+                        border-radius: 6px;
+                        text-decoration: none !important;
+                        transition: background 0.2s, border-color 0.2s;
+                        white-space: nowrap;
+                        background: transparent;
+                    }
+                    .scc-btn-ghost:hover {
+                        background: rgba(171,43,194,0.1);
+                        border-color: rgba(171,43,194,0.6);
+                        color: #d896f0 !important;
+                    }
+                    .scc-btn-gold {
+                        background: #ab2bc2;
+                        color: #ffffff !important;
+                        font-size: 13px;
+                        font-weight: 700;
+                        padding: 10px 22px;
+                        border-radius: 6px;
+                        text-decoration: none !important;
+                        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+                        white-space: nowrap;
+                        box-shadow: 0 3px 14px rgba(171,43,194,0.3);
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 7px;
+                    }
+                    .scc-btn-gold:hover {
+                        background: #c04dd6;
+                        transform: translateY(-1px);
+                        box-shadow: 0 6px 22px rgba(171,43,194,0.42);
+                        color: #ffffff !important;
+                    }
+
+                    /* Accent line */
+                    .scc-accent-line {
+                        height: 3px;
+                        background: linear-gradient(90deg, transparent 0%, #ab2bc2 28%, #9c27b0 72%, transparent 100%);
+                    }
+
+                    /* Hamburger icon */
+                    .scc-toggler {
+                        background: none;
+                        border: 1px solid rgba(255,255,255,0.2);
+                        border-radius: 6px;
+                        padding: 7px 10px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .scc-toggler:hover { border-color: rgba(171,43,194,0.5); }
+
+                    /* ── FOOTER ── */
+                    .scc-footer {
+                        background: #2a0a40;
+                        font-family: 'DM Sans', sans-serif;
+                        border-top: 3px solid #ab2bc2;
+                    }
+                    .scc-footer-main { padding: 64px 0 48px; }
+
+                    .scc-footer-heading {
+                        color: #ab2bc2;
+                        font-size: 10.5px;
+                        font-weight: 700;
+                        letter-spacing: 2.5px;
+                        text-transform: uppercase;
+                        margin-bottom: 20px;
+                        display: block;
+                    }
+
+                    .scc-footer-link {
+                        color: rgba(255,255,255,0.52);
+                        font-size: 13.5px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 4px 0;
+                        transition: color 0.2s;
+                    }
+                    .scc-footer-link:hover { color: #ab2bc2; }
+                    .scc-footer-link svg { flex-shrink: 0; opacity: 0.7; }
+                    .scc-footer-link:hover svg { opacity: 1; }
+
+                    .scc-contact-row {
+                        display: flex;
+                        gap: 11px;
+                        align-items: flex-start;
+                        margin-bottom: 14px;
+                    }
+                    .scc-contact-icon {
+                        width: 33px;
+                        height: 33px;
+                        background: rgba(171,43,194,0.1);
+                        border: 1px solid rgba(171,43,194,0.25);
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        margin-top: 1px;
+                    }
+                    .scc-contact-label {
+                        color: rgba(255,255,255,0.38);
+                        font-size: 11px;
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                        text-transform: uppercase;
+                        display: block;
+                        margin-bottom: 2px;
+                    }
+                    .scc-contact-val {
+                        color: rgba(255,255,255,0.75);
+                        font-size: 13.5px;
+                        text-decoration: none;
+                        transition: color 0.2s;
+                    }
+                    .scc-contact-val:hover { color: #ab2bc2; }
+
+                    .scc-opd-box {
+                        background: rgba(255,255,255,0.04);
+                        border: 1px solid rgba(255,255,255,0.08);
+                        border-radius: 10px;
+                        padding: 16px 18px;
+                        margin-top: 6px;
+                    }
+                    .scc-opd-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 5px 0;
+                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                    }
+                    .scc-opd-row:last-child { border-bottom: none; }
+                    .scc-opd-day { color: rgba(255,255,255,0.5); font-size: 13px; }
+                    .scc-opd-time { color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 600; }
+                    .scc-opd-emergency { color: #c45fd8 !important; font-weight: 700 !important; }
+
+                    .scc-social-btn {
+                        width: 34px;
+                        height: 34px;
+                        background: rgba(255,255,255,0.05);
+                        border: 1px solid rgba(255,255,255,0.12);
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        transition: background 0.2s, border-color 0.2s;
+                    }
+                    .scc-social-btn:hover {
+                        background: rgba(171,43,194,0.14);
+                        border-color: rgba(171,43,194,0.45);
+                    }
+
+                    .scc-footer-divider {
+                        height: 1px;
+                        background: rgba(255,255,255,0.07);
+                        margin: 0;
+                    }
+                    .scc-footer-bottom {
+                        background: #170526;
+                        padding: 18px 0;
+                    }
+                    .scc-footer-copy {
+                        color: rgba(255,255,255,0.27);
+                        font-size: 12px;
+                        margin: 0;
+                        line-height: 1.6;
+                    }
+                    .scc-footer-policy a {
+                        color: rgba(255,255,255,0.3);
+                        font-size: 12px;
+                        text-decoration: none;
+                        transition: color 0.2s;
+                    }
+                    .scc-footer-policy a:hover { color: #ab2bc2; }
+
+                    /* Accreditation pills */
+                    .scc-pill-gold {
+                        background: rgba(171,43,194,0.1);
+                        border: 1px solid rgba(171,43,194,0.3);
+                        color: #d896f0;
+                        font-size: 11px;
+                        font-weight: 600;
+                        padding: 4px 11px;
+                        border-radius: 100px;
+                        display: inline-block;
+                    }
+                    .scc-pill-teal {
+                        background: rgba(156,39,176,0.18);
+                        border: 1px solid rgba(156,39,176,0.4);
+                        color: #c45fd8;
+                        font-size: 11px;
+                        font-weight: 600;
+                        padding: 4px 11px;
+                        border-radius: 100px;
+                        display: inline-block;
+                    }
+
+                    /* Responsive */
+                    @media (max-width: 991px) {
+                        .scc-navbar-collapse {
+                            background: #33104d;
+                            border: 1px solid rgba(171,43,194,0.15);
+                            border-radius: 10px;
+                            padding: 16px;
+                            margin-top: 10px;
+                        }
+                        .scc-navbar-collapse .scc-btn-ghost,
+                        .scc-navbar-collapse .scc-btn-gold {
+                            width: 100%;
+                            justify-content: center;
+                            margin-top: 8px;
+                        }
+                        .scc-topbar .d-flex { flex-direction: column; align-items: flex-start !important; gap: 6px !important; }
+                    }
+                    @media (max-width: 576px) {
+                        .scc-logo-text-main { font-size: 15px; }
+                    }
+                </style>
+        
+    <style id="conditional_visibility"></style></head>
+    <body class="" is-ready="true">
+        
+
+
+
+        <div id="wrapwrap" class="   ">
+            <a class="o_skip_to_content btn btn-primary rounded-0 visually-hidden-focusable position-absolute start-0" href="#wrap">Skip to Content</a>
+                <header id="top" class="scc-header" data-bs-theme="dark">
+
+                    
+                    <div class="scc-topbar">
+                        <div class="container-fluid px-4">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+                                
+                                <div class="d-flex align-items-center gap-3 flex-wrap">
+                                    <a href="tel:+911234567890">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                                        +91 12345 67890
+                                    </a>
+                                    <span class="scc-topbar-sep">|</span>
+                                    <a href="mailto:info@example.com">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                                        info@example.com
+                                    </a>
+                                    <span class="scc-topbar-sep d-none d-md-inline">|</span>
+                                    <a href="https://wa.me/911234567890" class="d-none d-md-inline-flex">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+                                        WhatsApp
+                                    </a>
+                                </div>
+
+                                
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="scc-badge-gold d-none d-sm-inline">OPD: Mon–Sat 9am–6pm &nbsp;·&nbsp; Sun 10am–2pm</span>
+                                    <span class="scc-badge-teal">24/7 Emergency</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="container-fluid px-4">
+                        <nav class="navbar navbar-expand-lg scc-navbar">
+
+                            
+                            <a href="/" class="navbar-brand scc-logo-wrap">
+                                <img src="/health_plix/static/src/img/image.png" alt="Shivansh Cancer Center Logo" class="scc-logo-img" loading="lazy" style="">
+                                <div>
+                                    <div class="scc-logo-text-main">Shivansh</div>
+                                    <div class="scc-logo-text-sub">Cancer Center</div>
+                                </div>
+                            </a>
+
+                            
+                            <button class="scc-toggler navbar-toggler ms-auto me-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#sccNavbar" aria-controls="sccNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                                </svg>
+                            </button>
+
+                            
+                            <div class="collapse navbar-collapse scc-navbar-collapse" id="sccNavbar">
+
+                                <ul class="navbar-nav mx-auto gap-0 gap-lg-1">
+
+                                    <li class="nav-item">
+                                        <a href="/" class="nav-link scc-nav-link">Home</a>
+                                    </li>
+
+                                    
+                                    <li class="nav-item dropdown">
+                                        <a href="#" class="nav-link scc-nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Treatments
+                                        </a>
+                                        <ul class="dropdown-menu scc-dropdown-menu">
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 3h2v3h3v2h-3v3h-2v-3H8v-2h3V6z"></path></svg>
+                                                    Surgical Oncology
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 17.93V18a1 1 0 00-2 0v1.93A8.001 8.001 0 014.07 13H6a1 1 0 000-2H4.07A8.001 8.001 0 0111 4.07V6a1 1 0 002 0V4.07A8.001 8.001 0 0119.93 11H18a1 1 0 000 2h1.93A8.001 8.001 0 0113 19.93z"></path></svg>
+                                                    Radiation Therapy
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.53 15.47 0 12.45 0c-1.8 0-3.4.9-4.4 2.26L12 6H8L5.5 3.5 4 5l2 2H2v2h2l-1 9h18l-1-9h2V6z"></path></svg>
+                                                    Chemotherapy
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M19 3H5c-1.1 0-2 .9-2 2v11l4 4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5.18L5 18.83V17c1.86-1.45 4.18-2 7-2s5.14.55 7 2v2z"></path></svg>
+                                                    Medical Oncology
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M12 3.5c-4.69 0-8.5 3.81-8.5 8.5S7.31 20.5 12 20.5s8.5-3.81 8.5-8.5S16.69 3.5 12 3.5zm5 9.5h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
+                                                    Palliative &amp; Pain Care
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="dropdown-item scc-dropdown-item">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#9c27b0"><path d="M9.5 6.5v3h-3v-3h3M11 5H5v6h6V5zm-1.5 9.5v3h-3v-3h3M11 13H5v6h6v-6zm6.5-6.5v3h-3v-3h3M19 5h-6v6h6V5zm-6 8h1.5v1.5H13V13zm1.5 1.5H16V16h-1.5v-1.5zM16 13h1.5v1.5H16V13z"></path></svg>
+                                                    Advanced Diagnostics
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="/doctor/list" class="nav-link scc-nav-link">Our Doctors</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link scc-nav-link">About Us</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link scc-nav-link">Contact</a>
+                                    </li>
+
+                                </ul>
+
+                                
+                                <div class="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2 ms-lg-3">
+                                    <a href="#" class="scc-btn-ghost">
+                                        Free Second Opinion
+                                    </a>
+                                    <a href="/health_plix/book" class="scc-btn-gold">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"></path>
+                                        </svg>
+                                        Book Appointment
+                                    </a>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+
+                    
+                    <div class="scc-accent-line"></div>
+
+                </header>
+
+            <main>
+                    
+            <div class="oe_website_login_container">
+            <div class="oe_structure" id="oe_structure_login_top"></div>
+            <owl-component name="web.user_switch"><owl-root contenteditable="false" data-oe-protected="true" style="display: contents;"></owl-root></owl-component>
+            <form role="form" method="post" onsubmit="this.action = '/web/login' + location.hash" data-captcha="login" class="oe_login_form" action="/web/login">
+                <input type="hidden" name="csrf_token" value="297a370ff4760bc12cb2833442761d31fb582bfbo1815374715" style="">
+
+
+                <div class="mb-3 field-login">
+                    <label for="login" class="form-label d-flex justify-content-between">Email</label>
+                    <input type="text" placeholder="Enter your email" name="login" id="login" class="form-control" required="required" autocapitalize="off" autocomplete="username" style="">
+                </div>
+
+                <div class="o_caps_lock_warning">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <label for="password" class="form-label">Password</label>
+                <a class="btn btn-link btn-sm" tabindex="1" href="/web/reset_password?redirect=%2Fodoo%3F">Reset Password</a>
+                    </div>
+                    <div class="input-group mb-1">
+                        <input type="password" placeholder="Enter your password" name="password" id="password" class="form-control" required="required" autocomplete="current-password" maxlength="4096" style="">
+                        <button type="button" class="btn btn-sm border border-start-0 o_show_password">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                <span class="o_caps_lock_warning_text text-danger d-none"> Caps Lock is on! </span></div>
+
+
+                <div class="oe_login_buttons text-center d-grid mb-1 pt-3">
+                    <button type="submit" class="btn btn-primary">Log in</button>
+        
+            
+        <div class="o_login_auth">
+            <em class="d-block my-3 small text-center text-muted">- or -</em>
+            <div class="list-group">
+                <a class="passkey_login_link list-group-item list-group-item-action d-flex align-items-center gap-2 py-2" href="#">
+                    <i role="presentation" class="fa fa-qrcode"></i>
+                    <span class="mx-auto">Use a Passkey</span>
+                </a>
+            </div>
+        </div>
+                </div>
+
+                <input type="hidden" name="type" value="password" style="">
+            <input type="hidden" name="webauthn_response" style="">
+                <input type="hidden" name="redirect" value="/odoo?" style="">
+            </form>
+            <div class="oe_structure" id="oe_structure_login_bottom"></div>
+        </div>
+        
+        <div id="o_shared_blocks" class="oe_unremovable"></div>
+                </main>
+                <footer class="scc-footer">
+
+                    
+                    <div class="scc-footer-main">
+                        <div class="container">
+                            <div class="row g-5">
+
+                                
+                                <div class="col-lg-4 col-md-12">
+
+                                    
+                                    <a href="/" class="scc-logo-wrap mb-3 d-inline-flex">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR32nzQNWeEGFX5b24Ek5wVypn560SYgTqhRw&amp;s" alt="Shivansh Cancer Center" class="scc-logo-img" style="width: 56px; height: 56px;" loading="lazy">
+                                        <div>
+                                            <div class="scc-logo-text-main" style="font-size:20px;">Shivansh</div>
+                                            <div class="scc-logo-text-sub">Cancer Center</div>
+                                        </div>
+                                    </a>
+
+                                    <p style="color: rgba(255,255,255,0.48); font-size: 14px; line-height: 1.75; margin-bottom: 22px; max-width: 330px;">
+                                        Example State's most trusted cancer treatment centre offering comprehensive oncology services — from early diagnosis to advanced surgery and radiation therapy — in Example City.
+                                    </p>
+
+                                    
+                                    <div class="d-flex gap-2 flex-wrap mb-3">
+                                        <span class="scc-pill-gold">NABH Accredited</span>
+                                        <span class="scc-pill-gold">ISO Certified</span>
+                                        <span class="scc-pill-teal">24/7 Emergency</span>
+                                    </div>
+
+                                    
+                                    <div class="d-flex gap-2 mt-3">
+                                        
+                                        <a href="#" class="scc-social-btn" aria-label="Facebook">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)">
+                                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                            </svg>
+                                        </a>
+                                        
+                                        <a href="#" class="scc-social-btn" aria-label="YouTube">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)">
+                                                <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"></path>
+                                                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#2a0a40"></polygon>
+                                            </svg>
+                                        </a>
+                                        
+                                        <a href="https://wa.me/911234567890" class="scc-social-btn" aria-label="WhatsApp">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)">
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z M12 0C5.373 0 0 5.373 0 12c0 2.126.549 4.12 1.512 5.852L0 24l6.336-1.49A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"></path>
+                                            </svg>
+                                        </a>
+                                        
+                                        <a href="#" class="scc-social-btn" aria-label="Instagram">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                                <circle cx="12" cy="12" r="4"></circle>
+                                                <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.55)" stroke="none"></circle>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <span class="scc-footer-heading">Quick Links</span>
+                                    <div class="d-flex flex-column gap-1">
+                                        <a href="/" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Home
+                                        </a>
+                                        <a href="/doctor/list" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Our Specialists
+                                        </a>
+                                        <a href="/health_plix/book" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Book Appointment
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>About Us
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Patient Stories
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Free Second Opinion
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <span class="scc-footer-heading">Treatments</span>
+                                    <div class="d-flex flex-column gap-1">
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Surgical Oncology
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Radiation Therapy
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Chemotherapy
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Medical Oncology
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Immunotherapy
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Palliative Care
+                                        </a>
+                                        <a href="#" class="scc-footer-link">
+                                            <svg width="9" height="9" viewBox="0 0 24 24" fill="#9c27b0"><path d="M8 5v14l11-7z"></path></svg>Advanced Diagnostics
+                                        </a>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-lg-4 col-md-4">
+                                    <span class="scc-footer-heading">Contact &amp; Location</span>
+
+                                    
+                                    <div class="scc-contact-row">
+                                        <div class="scc-contact-icon">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="scc-contact-label">Address</span>
+                                            <span class="scc-contact-val" style="line-height:1.65; display:block;">
+                                                Shivansh Cancer Center<br>
+                                                123 Example Street, Example City<br>
+                                                Example State – 000000
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="scc-contact-row">
+                                        <div class="scc-contact-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="scc-contact-label">Helpline</span>
+                                            <a href="tel:+911234567890" class="scc-contact-val">+91 12345 67890</a>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="scc-contact-row">
+                                        <div class="scc-contact-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#ab2bc2"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="scc-contact-label">Email</span>
+                                            <a href="mailto:info@example.com" class="scc-contact-val">info@example.com</a>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="scc-opd-box mt-2">
+                                        <span class="scc-footer-heading mb-2" style="font-size:9.5px;">OPD Timings</span>
+                                        <div class="scc-opd-row">
+                                            <span class="scc-opd-day">Monday – Saturday</span>
+                                            <span class="scc-opd-time">9:00 am – 6:00 pm</span>
+                                        </div>
+                                        <div class="scc-opd-row">
+                                            <span class="scc-opd-day">Sunday</span>
+                                            <span class="scc-opd-time">10:00 am – 2:00 pm</span>
+                                        </div>
+                                        <div class="scc-opd-row">
+                                            <span class="scc-opd-day">Emergency</span>
+                                            <span class="scc-opd-time scc-opd-emergency">24 × 7</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="scc-footer-divider"></div>
+
+                    
+                    <div class="scc-footer-bottom">
+                        <div class="container">
+                            <div class="row align-items-center g-2">
+                                <div class="col-lg-8 col-md-7">
+                                    <p class="scc-footer-copy">
+                                        © 2025 Shivansh Cancer Center, Example City, Example State. All Rights Reserved.
+                                        &nbsp;|&nbsp; Best Cancer Hospital in Example City
+                                        &nbsp;|&nbsp; Best Cancer Surgeon in Example City
+                                        &nbsp;|&nbsp; Best Oncologist in Example State
+                                    </p>
+                                </div>
+                                <div class="col-lg-4 col-md-5 text-md-end">
+                                    <div class="scc-footer-policy d-flex gap-3 justify-content-md-end flex-wrap">
+                                        <a href="#">Privacy Policy</a>
+                                        <a href="#">Terms of Use</a>
+                                        <a href="#">Disclaimer</a>
+                                        <a href="#">Sitemap</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </footer>
+
+            </div>
+        
+        
+<div class="o-main-components-container"><div class="o-overlay-container"></div><div></div><div class="editor_notification_manager o_notification_manager o_upload_progress_toast"></div><div class="o_notification_manager"></div></div></body></html>

@@ -1,0 +1,7 @@
+{
+  "consoleErrors": [],
+  "jsExceptions": [
+    "Cannot read properties of null (reading 'querySelector')",
+    "Cannot read properties of null (reading 'querySelector')"
+  ]
+}
