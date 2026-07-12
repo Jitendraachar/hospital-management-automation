@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "devDependencies": {
-    "@playwright/test": "^1.61.1"
-=======
   "name": "hospital-management-automation",
   "version": "1.0.0",
   "description": "",
@@ -35,6 +31,5 @@
   },
   "dependencies": {
     "dotenv": "^17.4.2"
->>>>>>> 3b932712144519a8085d5edb20e45ebd61689d22
   }
 }
