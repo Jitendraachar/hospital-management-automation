@@ -53,6 +53,11 @@ export class PatientPage extends BasePage {
         await this.navigate(url);
     }
 
+    async openNewForm(): Promise<void> {
+        const url = new URL('/odoo/action-372/action-374/new', getBaseUrl()).toString();
+        await this.navigate(url);
+    }
+
     async clickNew(): Promise<void> {
         await this.click(this.newButton);
     }
