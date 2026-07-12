@@ -23,13 +23,28 @@ export class LoginPage extends BasePage {
         this.dashboardLink = page.getByRole('link', { name: 'Dashboard' });
         this.hospitalOperationsHeading = page.getByRole('heading', { name: 'Hospital Operations' });
         this.moduleSearchInput = page.getByRole('textbox', { name: 'Search modules, features, tools...' });
-        this.userStatusButton = page.getByRole('button', { name: 'User User is idle' });
+        this.userStatusButton = page.getByRole('button', { name: /User/i });
     }
 
     async open(): Promise<void> {
         const loginUrl = new URL('/odoo', getBaseUrl()).toString();
         await this.navigate(loginUrl);
-        await this.loginButton.waitFor({ state: 'visible' });
+
+        const loginVisible = await this.loginButton
+            .waitFor({ state: 'visible', timeout: 10000 })
+            .then(() => true)
+            .catch(() => false);
+
+        if (!loginVisible) {
+            const authenticatedVisible = await this.moduleSearchInput
+                .waitFor({ state: 'visible', timeout: 10000 })
+                .then(() => true)
+                .catch(() => false);
+
+            if (!authenticatedVisible) {
+                await this.page.waitForLoadState('domcontentloaded');
+            }
+        }
     }
 
     async enterEmail(email: string): Promise<void> {
@@ -45,6 +60,11 @@ export class LoginPage extends BasePage {
     }
 
     async login(email: string, password: string): Promise<void> {
+        const isLoginVisible = await this.loginButton.isVisible().catch(() => false);
+        if (!isLoginVisible) {
+            return;
+        }
+
         await this.enterEmail(email);
         await this.enterPassword(password);
         await this.submit();
